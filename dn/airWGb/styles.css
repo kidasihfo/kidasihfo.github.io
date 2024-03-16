@@ -3,6 +3,12 @@ body, html {
     padding: 0;
     height: 100%;
 }
+.container {
+    margin-top: 20px;
+}
+.view-counter {
+    margin-bottom: 10px;
+}
 .iframe-container {
     position: relative;
     width: 100%;
