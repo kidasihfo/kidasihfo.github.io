@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Projects - Minecraft Plugin Developer</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(to right, #4b6cb7, #182848);
+        }
+        .hamburger {
+            display: block;
+            width: 24px;
+            height: 24px;
+            position: relative;
+            cursor: pointer;
+        }
+        .hamburger div {
+            width: 24px;
+            height: 3px;
+            background: white;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+        .hamburger.active div:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        .hamburger.active div:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active div:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+        .menu {
+            display: none;
+        }
+        .menu.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+
+    <!-- Header -->
+    <header class="gradient-bg text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-3xl font-bold">Minecraft Plugin Developer</h1>
+            <div id="menu-button" class="hamburger md:hidden">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <nav id="menu" class="menu md:flex md:items-center">
+                <a href="index.html#about" class="block md:inline-block text-lg mx-2">About</a>
+                <a href="index.html#projects" class="block md:inline-block text-lg mx-2">Projects</a>
+                <a href="index.html#contact" class="block md:inline-block text-lg mx-2">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Projects Section -->
+    <section class="container mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
+        <h2 class="text-3xl font-bold mb-4">All Projects</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Project 1 -->
+            <div class="bg-gray-200 p-4 rounded-lg shadow-md flex items-center">
+                <img src="https://images.pexels.com/photos/158780/pexels-photo-158780.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=100&w=100" alt="Project Image 1" class="w-24 h-24 object-cover mr-4 rounded-lg">
+                <div>
+                    <h3 class="text-xl font-bold mb-2">Project One</h3>
+                    <span class="inline-block bg-green-500 text-white text-xs px-2 py-1 rounded">FREE</span>
+                    <p class="mt-2">This is a brief description of Project One. It's a free plugin that enhances gameplay.</p>
+                </div>
+            </div>
+            <!-- Project 2 -->
+            <div class="bg-gray-200 p-4 rounded-lg shadow-md flex items-center">
+                <img src="https://images.pexels.com/photos/158780/pexels-photo-158780.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=100&w=100" alt="Project Image 2" class="w-24 h-24 object-cover mr-4 rounded-lg">
+                <div>
+                    <h3 class="text-xl font-bold mb-2">Project Two</h3>
+                    <span class="inline-block bg-red-500 text-white text-xs px-2 py-1 rounded">PAID</span>
+                    <p class="mt-2">This is a brief description of Project Two. It's a paid plugin that adds new features.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="gradient-bg text-white p-4 mt-10">
+        <div class="container mx-auto text-center">
+            &copy; 2024 Minecraft Plugin Developer. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
