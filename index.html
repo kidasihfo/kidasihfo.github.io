@@ -12,7 +12,7 @@
 <body class="bg-gray-100">
     <header class="bg-gradient-to-r from-blue-500 to-blue-700 text-white p-4 text-center shadow-md">
         <h1 class="text-4xl font-bold">Netshop Testimonial</h1>
-        <p class="mt-2 text-lg">(2) Semua aktivitas transaksi tersimpan aman disini</p>
+        <p class="mt-2 text-lg">2/ Semua aktivitas transaksi tersimpan aman disini</p>
     </header>
     <main class="container mx-auto p-4">
         <div id="gallery" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -26,6 +26,14 @@
         <span class="close">&times;</span>
         <img class="lightbox-content" id="lightbox-img">
         <div id="caption" class="caption"></div>
+    </div>
+    <div id="popup" class="popup hidden">
+        <div class="popup-content bg-white p-6 rounded-lg shadow-lg text-center">
+            <h2 class="text-2xl font-bold mb-4">PERINGATAN</h2>
+            <p class="mb-6">Mulai Transaksi Sekarang?</p>
+            <button class="btn-yes bg-blue-500 text-white py-2 px-4 rounded mr-2">Ya, sekarang</button>
+            <button class="btn-no bg-gray-500 text-white py-2 px-4 rounded">Nanti dulu</button>
+        </div>
     </div>
     <script src="script.js"></script>
     <script src="lightbox.js"></script>
