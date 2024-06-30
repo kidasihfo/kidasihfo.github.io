@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const gallery = document.getElementById('gallery');
     const imageFolder = 'backuptesti/';
-    const images = ['gambar1.jpg', 'gambar2.jpg', 'gambar3.jpg']; // Add all your images here
+    const images = ['testi1.jpg', 'testi2.jpg', 'gambar3.jpg']; // Add all your images here
 
     images.forEach(image => {
         const imgElement = document.createElement('img');
