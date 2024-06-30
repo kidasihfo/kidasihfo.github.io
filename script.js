@@ -21,6 +21,8 @@ document.addEventListener('DOMContentLoaded', function() {
         imgContainer.appendChild(caption);
         gallery.appendChild(imgContainer);
     });
+
+    setTimeout(showPopup, 15000);
 });
 
 function openLightbox(image, caption) {
@@ -35,5 +37,22 @@ function openLightbox(image, caption) {
     const closeBtn = document.querySelector('.lightbox .close');
     closeBtn.onclick = () => {
         lightbox.style.display = 'none';
+    };
+}
+
+function showPopup() {
+    const popup = document.getElementById('popup');
+    popup.classList.remove('hidden');
+
+    const btnYes = popup.querySelector('.btn-yes');
+    const btnNo = popup.querySelector('.btn-no');
+
+    btnYes.onclick = () => {
+        // Add your "Yes" action here
+        popup.classList.add('hidden');
+    };
+
+    btnNo.onclick = () => {
+        popup.classList.add('hidden');
     };
 }
