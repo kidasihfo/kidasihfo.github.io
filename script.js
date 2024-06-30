@@ -3,7 +3,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const imageFolder = 'backuptesti/';
     const images = ['testi1.jpg', 'testi2.jpg', 'testi3.jpg']; // Tambahkan semua gambar di sini
 
-    images.forEach((image, index) => {
+    // Urutkan gambar dari yang terbaru
+    const sortedImages = images.sort((a, b) => {
+        const aNum = parseInt(a.replace('testi', '').replace('.jpg', ''));
+        const bNum = parseInt(b.replace('testi', '').replace('.jpg', ''));
+        return bNum - aNum;
+    });
+
+    sortedImages.forEach((image, index) => {
         const imgContainer = document.createElement('div');
         imgContainer.classList.add('img-container', 'w-full', 'h-auto', 'rounded-lg', 'shadow-md', 'overflow-hidden');
 
@@ -21,8 +28,6 @@ document.addEventListener('DOMContentLoaded', function() {
         imgContainer.appendChild(caption);
         gallery.appendChild(imgContainer);
     });
-
-    setTimeout(showPopup, 15000);
 });
 
 function openLightbox(image, caption) {
@@ -37,22 +42,5 @@ function openLightbox(image, caption) {
     const closeBtn = document.querySelector('.lightbox .close');
     closeBtn.onclick = () => {
         lightbox.style.display = 'none';
-    };
-}
-
-function showPopup() {
-    const popup = document.getElementById('popup');
-    popup.classList.remove('hidden');
-
-    const btnYes = popup.querySelector('.btn-yes');
-    const btnNo = popup.querySelector('.btn-no');
-
-    btnYes.onclick = () => {
-        // Add your "Yes" action here
-        popup.classList.add('hidden');
-    };
-
-    btnNo.onclick = () => {
-        popup.classList.add('hidden');
     };
 }
