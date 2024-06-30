@@ -1,0 +1,12 @@
+/* Lightbox styles for responsiveness and transitions */
+.lightbox-content {
+    max-width: 80%;
+    max-height: 80%;
+    margin: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.lightbox-content:hover {
+    transform: scale(1.05);
+}
