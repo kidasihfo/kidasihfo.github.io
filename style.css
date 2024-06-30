@@ -56,8 +56,3 @@
     font-size: 40px;
     cursor: pointer;
 }
-
-/* Button styles */
-button:focus {
-    outline: none;
-}
