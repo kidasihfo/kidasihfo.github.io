@@ -1,6 +1,5 @@
 [
     {"file": "testi1.jpg", "description": "Testimonial 1"},
     {"file": "testi2.jpg", "description": "Testimonial 2"},
-    {"file": "testi3.jpg", "description": "Testimonial 3"},
-    // Tambahkan lebih banyak gambar dengan deskripsi di sini
+    {"file": "testi3.jpg", "description": "Testimonial 3"}
 ]
