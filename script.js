@@ -10,7 +10,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const imgElement = document.createElement('img');
         imgElement.src = `${imageFolder}${image}`;
         imgElement.alt = `Testimonial Image ${index + 1}`;
-        imgElement.classList.add('w-full', 'h-auto');
+        imgElement.classList.add('w-full', 'h-auto', 'cursor-pointer');
+        imgElement.onclick = () => openLightbox(image, `Testimonial ${index + 1}`);
 
         const caption = document.createElement('div');
         caption.classList.add('img-caption');
@@ -21,3 +22,18 @@ document.addEventListener('DOMContentLoaded', function() {
         gallery.appendChild(imgContainer);
     });
 });
+
+function openLightbox(image, caption) {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('caption');
+
+    lightboxImg.src = `backuptesti/${image}`;
+    lightboxCaption.innerText = caption;
+    lightbox.style.display = 'flex';
+
+    const closeBtn = document.querySelector('.lightbox .close');
+    closeBtn.onclick = () => {
+        lightbox.style.display = 'none';
+    };
+}
