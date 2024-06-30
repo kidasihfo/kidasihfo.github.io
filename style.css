@@ -56,9 +56,3 @@
     font-size: 40px;
     cursor: pointer;
 }
-
-/* Loader styles */
-#loading {
-    font-size: 2rem;
-    color: #4A5568;
-}
