@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const amount = urlParams.get('rp') ? parseInt(urlParams.get('rp'), 10) : null;
 
     if (!clientName || !amount) {
-        window.location.href = 'Wht7cbVlpaymenterror';
+        window.location.href = '404.html';
     }
 
     const paymentMethods = [
@@ -50,6 +50,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 3000);
     }
 
+    function calculateAdminFee(amount, rate) {
+        return amount * (1 + rate);
+    }
+
+    function calculatePulsaAmount(amount, rate) {
+        return amount / rate;
+    }
+
+    function convertToDollar(amount, rate) {
+        return amount / rate;
+    }
+
     clientNameInput.value = clientName;
     amountInput.value = formatRupiah(amount);
 
@@ -78,12 +90,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 totalAmount = calculateAdminFee(amount, 0.0035);
                 adminFee = totalAmount - amount;
                 modalPrice.textContent = formatRupiah(totalAmount);
-                modalAdminFee.textContent = `*termsuk PPN sebesar: ${formatRupiah(adminFee)}`;
+                modalAdminFee.textContent = `Biaya admin: ${formatRupiah(adminFee)}`;
             } else if (method.name === 'Pulsa') {
                 totalAmount = calculatePulsaAmount(amount, pulsaRate);
                 adminFee = totalAmount - amount;
                 modalPrice.textContent = formatRupiah(totalAmount);
-                modalAdminFee.textContent = `*termsuk PPN sebesar: ${formatRupiah(adminFee)}`;
+                modalAdminFee.textContent = `Biaya admin: ${formatRupiah(adminFee)}`;
             } else if (method.name === 'PayPal') {
                 const dollarAmount = convertToDollar(amount, dollarRate);
                 modalPrice.textContent = formatDollar(dollarAmount);
@@ -94,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 modalAdminFee.textContent = '';
             }
 
-            confirmPayment.onclick = () => window.location.href = 'pending-confirm';
+            confirmPayment.onclick = () => window.location.href = `pending-confirm/index.html?client=${clientName}&rp=${amount}`;
             modal.classList.remove('hidden');
         });
 
