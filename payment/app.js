@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
+    const clientName = urlParams.get('client');
     const amount = urlParams.get('rp') ? parseInt(urlParams.get('rp'), 10) : null;
 
-    if (!amount) {
+    if (!clientName || !amount) {
         window.location.href = 'Wht7cbVlpaymenterror';
     }
 
@@ -16,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Tambahkan metode pembayaran lain di sini
     ];
 
+    const clientInfo = document.getElementById('clientInfo');
     const container = document.getElementById('paymentMethods');
     const modal = document.getElementById('modal');
     const modalImage = document.getElementById('modalImage');
@@ -47,6 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 3000);
     }
 
+    clientInfo.textContent = `Client: ${clientName}`;
+
     paymentMethods.forEach(method => {
         const card = document.createElement('div');
         card.className = 'bg-white p-6 rounded-lg shadow-lg transform transition-transform hover:scale-105 cursor-pointer';
@@ -72,12 +76,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 totalAmount = calculateAdminFee(amount, 0.0035);
                 adminFee = totalAmount - amount;
                 modalPrice.textContent = formatRupiah(totalAmount);
-                modalAdminFee.textContent = `*termasuk PPN sebesar: ${formatRupiah(adminFee)}`;
+                modalAdminFee.textContent = `Biaya admin: ${formatRupiah(adminFee)}`;
             } else if (method.name === 'Pulsa') {
                 totalAmount = calculatePulsaAmount(amount, pulsaRate);
                 adminFee = totalAmount - amount;
                 modalPrice.textContent = formatRupiah(totalAmount);
-                modalAdminFee.textContent = `*termasuk PPN sebesar: ${formatRupiah(adminFee)}`;
+                modalAdminFee.textContent = `Biaya admin: ${formatRupiah(adminFee)}`;
             } else if (method.name === 'PayPal') {
                 const dollarAmount = convertToDollar(amount, dollarRate);
                 modalPrice.textContent = formatDollar(dollarAmount);
