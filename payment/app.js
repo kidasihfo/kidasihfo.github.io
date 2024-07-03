@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const toast = document.getElementById('toast');
 
     const dollarRate = 17076; // Rate per 1 dollar in IDR
+    const pulsaRate = 0.90; // Rate for Pulsa conversion
 
     function formatRupiah(amount) {
         return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(amount);
@@ -67,8 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 modalPrice.textContent = formatRupiah(totalAmount);
                 modalAdminFee.textContent = `Biaya admin: ${formatRupiah(adminFee)}`;
             } else if (method.name === 'Pulsa') {
-                totalAmount = calculatePulsaAdminFee(amount);
-                adminFee = amount - totalAmount;
+                totalAmount = calculatePulsaAmount(amount, pulsaRate);
+                adminFee = totalAmount - amount;
                 modalPrice.textContent = formatRupiah(totalAmount);
                 modalAdminFee.textContent = `Biaya admin: ${formatRupiah(adminFee)}`;
             } else if (method.name === 'PayPal') {
