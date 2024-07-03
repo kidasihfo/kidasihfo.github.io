@@ -17,7 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Tambahkan metode pembayaran lain di sini
     ];
 
-    const clientInfo = document.getElementById('clientInfo');
+    const clientNameInput = document.getElementById('clientName');
+    const amountInput = document.getElementById('amount');
     const container = document.getElementById('paymentMethods');
     const modal = document.getElementById('modal');
     const modalImage = document.getElementById('modalImage');
@@ -49,7 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 3000);
     }
 
-    clientInfo.textContent = `Client: ${clientName}`;
+    clientNameInput.value = clientName;
+    amountInput.value = formatRupiah(amount);
 
     paymentMethods.forEach(method => {
         const card = document.createElement('div');
