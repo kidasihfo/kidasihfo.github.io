@@ -9,8 +9,19 @@
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto px-4 py-8">
-        <div id="clientInfo" class="text-center mb-8"></div>
         <h1 class="text-4xl font-bold text-center mb-8">Choose Your Payment Method</h1>
+        <div id="clientInfo" class="max-w-lg mx-auto mb-8 bg-white p-6 rounded-lg shadow-lg">
+            <form class="space-y-4">
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="clientName">Client Name</label>
+                    <input class="appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 cursor-not-allowed" id="clientName" type="text" readonly>
+                </div>
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="amount">Nominal (Rp)</label>
+                    <input class="appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 cursor-not-allowed" id="amount" type="text" readonly>
+                </div>
+            </form>
+        </div>
         <div id="paymentMethods" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
     </div>
 
