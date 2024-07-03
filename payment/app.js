@@ -28,8 +28,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const confirmPayment = document.getElementById('confirmPayment');
     const toast = document.getElementById('toast');
 
+    const dollarRate = 17076; // Rate per 1 dollar in IDR
+
     function formatRupiah(amount) {
         return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(amount);
+    }
+
+    function formatDollar(amount) {
+        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
     }
 
     function showToast() {
@@ -51,9 +57,30 @@ document.addEventListener('DOMContentLoaded', () => {
             modalTitle.textContent = method.name;
             modalDescription.textContent = method.description;
             modalInstructions.textContent = method.instructions;
-            const totalAmount = method.name === 'QRIS' ? calculateAdminFee(amount, 0.0035) : amount;
-            modalPrice.textContent = amount ? formatRupiah(totalAmount) : '';
-            modalAdminFee.textContent = method.name === 'QRIS' ? `Biaya admin: ${formatRupiah(totalAmount - amount)}` : '';
+            
+            let totalAmount;
+            let adminFee;
+
+            if (method.name === 'QRIS') {
+                totalAmount = calculateAdminFee(amount, 0.0035);
+                adminFee = totalAmount - amount;
+                modalPrice.textContent = formatRupiah(totalAmount);
+                modalAdminFee.textContent = `Biaya admin: ${formatRupiah(adminFee)}`;
+            } else if (method.name === 'Pulsa') {
+                totalAmount = calculatePulsaAdminFee(amount);
+                adminFee = amount - totalAmount;
+                modalPrice.textContent = formatRupiah(totalAmount);
+                modalAdminFee.textContent = `Biaya admin: ${formatRupiah(adminFee)}`;
+            } else if (method.name === 'PayPal') {
+                const dollarAmount = convertToDollar(amount, dollarRate);
+                modalPrice.textContent = formatDollar(dollarAmount);
+                modalAdminFee.textContent = '';
+            } else {
+                totalAmount = amount;
+                modalPrice.textContent = formatRupiah(totalAmount);
+                modalAdminFee.textContent = '';
+            }
+
             confirmPayment.onclick = () => window.location.href = 'pending-confirm.html';
             modal.classList.remove('hidden');
         });
