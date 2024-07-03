@@ -29,10 +29,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalAdminFee = document.getElementById('modalAdminFee');
     const closeModal = document.getElementById('closeModal');
     const confirmPayment = document.getElementById('confirmPayment');
+    const copyEmail = document.getElementById('copyEmail');
     const toast = document.getElementById('toast');
 
     const dollarRate = 17076; // Rate per 1 dollar in IDR
     const pulsaRate = 0.90; // Rate for Pulsa conversion
+    const paypalEmail = 'faudzansyt@gmail.com';
 
     function formatRupiah(amount) {
         return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(amount);
@@ -87,23 +89,27 @@ document.addEventListener('DOMContentLoaded', () => {
             let adminFee;
 
             if (method.name === 'QRIS') {
-                totalAmount = calculateAdminFee(amount, 0.0045);
+                totalAmount = calculateAdminFee(amount, 0.0035);
                 adminFee = totalAmount - amount;
                 modalPrice.textContent = formatRupiah(totalAmount);
                 modalAdminFee.textContent = `*termasuk PPN sebesar: ${formatRupiah(adminFee)}`;
+                copyEmail.classList.add('hidden');
             } else if (method.name === 'Pulsa') {
                 totalAmount = calculatePulsaAmount(amount, pulsaRate);
                 adminFee = totalAmount - amount;
                 modalPrice.textContent = formatRupiah(totalAmount);
                 modalAdminFee.textContent = `*termasuk PPN sebesar: ${formatRupiah(adminFee)}`;
+                copyEmail.classList.add('hidden');
             } else if (method.name === 'PayPal') {
                 const dollarAmount = convertToDollar(amount, dollarRate);
                 modalPrice.textContent = formatDollar(dollarAmount);
                 modalAdminFee.textContent = '';
+                copyEmail.classList.remove('hidden');
             } else {
                 totalAmount = amount;
                 modalPrice.textContent = formatRupiah(totalAmount);
                 modalAdminFee.textContent = '';
+                copyEmail.classList.add('hidden');
             }
 
             confirmPayment.onclick = () => window.location.href = `pending-confirm/index.html?client=${clientName}&rp=${amount}`;
@@ -133,5 +139,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.target === modal) {
             modal.classList.add('hidden');
         }
+    });
+
+    copyEmail.addEventListener('click', () => {
+        navigator.clipboard.writeText(paypalEmail).then(() => {
+            showToast('Email tujuan berhasil disalin.');
+        }).catch(err => {
+            showToast('Gagal menyalin email.');
+        });
     });
 });
