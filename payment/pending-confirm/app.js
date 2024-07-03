@@ -3,10 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const clientName = urlParams.get('client');
     const amount = urlParams.get('rp') ? parseInt(urlParams.get('rp'), 10) : null;
 
-    if (!clientName || !amount) {
-        window.location.href = '../404.html';
-    }
-
     const clientNameElement = document.getElementById('clientName');
     const amountElement = document.getElementById('amount');
 
