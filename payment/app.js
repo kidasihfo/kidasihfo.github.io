@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: 'Pulsa', icon: 'pulsa.png', modalIcon: 'pulsa_large.png', description: 'Pembayaran dengan Pulsa.', instructions: 'Kirim pulsa ke nomor yang ditentukan.', minAmount: 30000 },
         { name: 'Bank Transfer', icon: 'bank.png', modalIcon: 'bank_large.png', description: 'Pembayaran dengan Transfer Bank.', instructions: 'Transfer jumlah yang ditentukan ke nomor rekening bank yang diberikan.', disabled: true },
         { name: 'E-Wallet', icon: 'ewallet.png', modalIcon: 'ewallet_large.png', description: 'Pembayaran dengan E-Wallet.', instructions: 'Gunakan aplikasi e-wallet Anda untuk mentransfer jumlah yang ditentukan.', disabled: true },
-        { name: 'PayPal', icon: 'paypal.png', modalIcon: 'paypal_large.png', description: 'Pembayaran dengan PayPal.', instructions: 'Lakukan pembayaran melalui akun PayPal Anda.', email: 'faudzansyt@gmail.com' },
+        { name: 'PayPal', icon: 'paypal.png', modalIcon: 'paypal_large.png', description: 'Pembayaran dengan PayPal.', instructions: 'Lakukan pembayaran melalui akun PayPal Anda.' },
         { name: 'Credit Card', icon: 'creditcard.png', modalIcon: 'creditcard_large.png', description: 'Pembayaran dengan Kartu Kredit.', instructions: 'Masukkan detail kartu kredit Anda untuk menyelesaikan pembayaran.', disabled: true },
         // Tambahkan metode pembayaran lain di sini
     ];
@@ -29,12 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalAdminFee = document.getElementById('modalAdminFee');
     const closeModal = document.getElementById('closeModal');
     const confirmPayment = document.getElementById('confirmPayment');
-    const copyEmail = document.getElementById('copyEmail');
     const toast = document.getElementById('toast');
 
     const dollarRate = 17076; // Rate per 1 dollar in IDR
     const pulsaRate = 0.90; // Rate for Pulsa conversion
-    const paypalEmail = 'faudzansyt@gmail.com';
 
     function formatRupiah(amount) {
         return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(amount);
@@ -89,27 +87,23 @@ document.addEventListener('DOMContentLoaded', () => {
             let adminFee;
 
             if (method.name === 'QRIS') {
-                totalAmount = calculateAdminFee(amount, 0.0035);
+                totalAmount = calculateAdminFee(amount, 0.0045);
                 adminFee = totalAmount - amount;
                 modalPrice.textContent = formatRupiah(totalAmount);
                 modalAdminFee.textContent = `*termasuk PPN sebesar: ${formatRupiah(adminFee)}`;
-                copyEmail.classList.add('hidden');
             } else if (method.name === 'Pulsa') {
                 totalAmount = calculatePulsaAmount(amount, pulsaRate);
                 adminFee = totalAmount - amount;
                 modalPrice.textContent = formatRupiah(totalAmount);
                 modalAdminFee.textContent = `*termasuk PPN sebesar: ${formatRupiah(adminFee)}`;
-                copyEmail.classList.add('hidden');
             } else if (method.name === 'PayPal') {
                 const dollarAmount = convertToDollar(amount, dollarRate);
                 modalPrice.textContent = formatDollar(dollarAmount);
                 modalAdminFee.textContent = '';
-                copyEmail.classList.remove('hidden');
             } else {
                 totalAmount = amount;
                 modalPrice.textContent = formatRupiah(totalAmount);
                 modalAdminFee.textContent = '';
-                copyEmail.classList.add('hidden');
             }
 
             confirmPayment.onclick = () => window.location.href = `pending-confirm/index.html?client=${clientName}&rp=${amount}`;
@@ -139,13 +133,5 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.target === modal) {
             modal.classList.add('hidden');
         }
-    });
-
-    copyEmail.addEventListener('click', () => {
-        navigator.clipboard.writeText(paypalEmail).then(() => {
-            showToast('Email tujuan berhasil disalin.');
-        }).catch(err => {
-            showToast('Gagal menyalin email.');
-        });
     });
 });
