@@ -78,12 +78,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 totalAmount = calculateAdminFee(amount, 0.0035);
                 adminFee = totalAmount - amount;
                 modalPrice.textContent = formatRupiah(totalAmount);
-                modalAdminFee.textContent = `Biaya admin: ${formatRupiah(adminFee)}`;
+                modalAdminFee.textContent = `*termsuk PPN sebesar: ${formatRupiah(adminFee)}`;
             } else if (method.name === 'Pulsa') {
                 totalAmount = calculatePulsaAmount(amount, pulsaRate);
                 adminFee = totalAmount - amount;
                 modalPrice.textContent = formatRupiah(totalAmount);
-                modalAdminFee.textContent = `Biaya admin: ${formatRupiah(adminFee)}`;
+                modalAdminFee.textContent = `*termsuk PPN sebesar: ${formatRupiah(adminFee)}`;
             } else if (method.name === 'PayPal') {
                 const dollarAmount = convertToDollar(amount, dollarRate);
                 modalPrice.textContent = formatDollar(dollarAmount);
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 modalAdminFee.textContent = '';
             }
 
-            confirmPayment.onclick = () => window.location.href = 'pending-confirm.html';
+            confirmPayment.onclick = () => window.location.href = 'pending-confirm';
             modal.classList.remove('hidden');
         });
 
