@@ -2,8 +2,8 @@ function calculateAdminFee(amount, feePercentage) {
     return amount + (amount * feePercentage);
 }
 
-function calculatePulsaAdminFee(amount) {
-    return amount * 0.90;
+function calculatePulsaAmount(amount, rate) {
+    return amount / rate;
 }
 
 function convertToDollar(amount, rate) {
