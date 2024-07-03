@@ -87,15 +87,15 @@ document.addEventListener('DOMContentLoaded', () => {
             let adminFee;
 
             if (method.name === 'QRIS') {
-                totalAmount = calculateAdminFee(amount, 0.0035);
+                totalAmount = calculateAdminFee(amount, 0.0045);
                 adminFee = totalAmount - amount;
                 modalPrice.textContent = formatRupiah(totalAmount);
-                modalAdminFee.textContent = `Biaya admin: ${formatRupiah(adminFee)}`;
+                modalAdminFee.textContent = `*termasuk PPN sebesar: ${formatRupiah(adminFee)}`;
             } else if (method.name === 'Pulsa') {
                 totalAmount = calculatePulsaAmount(amount, pulsaRate);
                 adminFee = totalAmount - amount;
                 modalPrice.textContent = formatRupiah(totalAmount);
-                modalAdminFee.textContent = `Biaya admin: ${formatRupiah(adminFee)}`;
+                modalAdminFee.textContent = `*termasuk PPN sebesar: ${formatRupiah(adminFee)}`;
             } else if (method.name === 'PayPal') {
                 const dollarAmount = convertToDollar(amount, dollarRate);
                 modalPrice.textContent = formatDollar(dollarAmount);
