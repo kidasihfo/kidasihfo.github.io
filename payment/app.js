@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const paymentMethods = [
         { name: 'QRIS', icon: 'qris.png', modalIcon: 'qris_large.png', description: 'Pembayaran dengan QRIS.', instructions: 'Scan kode QR dan lakukan pembayaran melalui aplikasi e-wallet Anda.' },
-        { name: 'Pulsa', icon: 'pulsa.png', modalIcon: 'pulsa_large.png', description: 'Pembayaran dengan Pulsa.', instructions: 'Kirim pulsa ke nomor yang ditentukan.' },
+        { name: 'Pulsa', icon: 'pulsa.png', modalIcon: 'pulsa_large.png', description: 'Pembayaran dengan Pulsa.', instructions: 'Kirim pulsa ke nomor yang ditentukan.', minAmount: 30000 },
         { name: 'Bank Transfer', icon: 'bank.png', modalIcon: 'bank_large.png', description: 'Pembayaran dengan Transfer Bank.', instructions: 'Transfer jumlah yang ditentukan ke nomor rekening bank yang diberikan.', disabled: true },
         { name: 'E-Wallet', icon: 'ewallet.png', modalIcon: 'ewallet_large.png', description: 'Pembayaran dengan E-Wallet.', instructions: 'Gunakan aplikasi e-wallet Anda untuk mentransfer jumlah yang ditentukan.', disabled: true },
         { name: 'PayPal', icon: 'paypal.png', modalIcon: 'paypal_large.png', description: 'Pembayaran dengan PayPal.', instructions: 'Lakukan pembayaran melalui akun PayPal Anda.' },
@@ -39,7 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
         return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
     }
 
-    function showToast() {
+    function showToast(message) {
+        toast.textContent = message;
         toast.classList.remove('hidden');
         setTimeout(() => {
             toast.classList.add('hidden');
@@ -51,9 +52,14 @@ document.addEventListener('DOMContentLoaded', () => {
         card.className = 'bg-white p-6 rounded-lg shadow-lg transform transition-transform hover:scale-105 cursor-pointer';
         card.addEventListener('click', () => {
             if (method.disabled) {
-                showToast();
+                showToast('Metode pembayaran ini tidak tersedia.');
                 return;
             }
+            if (method.minAmount && amount < method.minAmount) {
+                showToast(`Metode pembayaran ${method.name} hanya tersedia untuk nominal di atas ${formatRupiah(method.minAmount)}.`);
+                return;
+            }
+
             modalImage.src = `./images/${method.modalIcon}`;
             modalTitle.textContent = method.name;
             modalDescription.textContent = method.description;
