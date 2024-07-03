@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netshop.id - Discord</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .background-image {
+            background-image: url('https://images.unsplash.com/photo-1641652520432-6f8039fc4786?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="background-image flex items-center justify-center min-h-screen">
+    <div class="bg-white bg-opacity-75 p-8 rounded-lg shadow-lg text-center max-w-lg">
+        <img src="https://media.discordapp.net/attachments/1257667523143274537/1257915648923926649/hitam_modern_huruf_N_logo.png?ex=668624bd&is=6684d33d&hm=62f19e2c1405977f5eb70f6a0e28e45411dc0813e2c81eceea9c065727f8062e&" alt="Discord Logo" class="mx-auto mb-4 w-24">
+        <h1 class="text-3xl font-bold mb-4 text-gray-800">Welcome to Netsho Discord!</h1>
+        <p class="mb-6 text-gray-700">Bergabunglah dengan komunitas kami untuk mendapatkan informasi terbaru, penawaran khusus, dan terhubung dengan sesama pembeli. Klik tombol di bawah ini untuk bergabung dengan server kami.</p>
+        
+        <button id="inviteButton" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded-full hover:bg-blue-700 transition duration-300">
+            <i class="fas fa-sign-in-alt"></i> Join Now
+        </button>
+
+        <div class="mt-8">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-800"><i class="fas fa-comments"></i> Apa Kata Pelanggan Kami</h2>
+            <p class="italic text-gray-700 mb-4">"I love this store! The community is so helpful and the products are amazing." - Jane Doe</p>
+            <p class="italic text-gray-700">"Best shopping experience ever. Highly recommend joining their Discord!" - John Smith</p>
+        </div>
+
+        <div class="mt-8">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-800"><i class="fas fa-envelope"></i> Contact Us</h2>
+            <p class="text-gray-700"><i class="fas fa-envelope"></i> Email: support@store.com</p>
+            <p class="text-gray-700"><i class="fas fa-phone"></i> Phone: (123) 456-7890</p>
+        </div>
+    </div>
+    <script>
+        document.getElementById('inviteButton').addEventListener('click', function() {
+            window.location.href = 'https://discord.com/invite/2yr5WMKD2H';
+        });
+    </script>
+</body>
+</html>
