@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalDescription = document.getElementById('modalDescription');
     const modalInstructions = document.getElementById('modalInstructions');
     const modalPrice = document.getElementById('modalPrice');
+    const modalAdminFee = document.getElementById('modalAdminFee');
     const closeModal = document.getElementById('closeModal');
 
     function formatRupiah(amount) {
@@ -37,7 +38,9 @@ document.addEventListener('DOMContentLoaded', () => {
             modalTitle.textContent = method.name;
             modalDescription.textContent = method.description;
             modalInstructions.textContent = method.instructions;
-            modalPrice.textContent = amount ? formatRupiah(amount) : '';
+            const totalAmount = method.name === 'QRIS' ? calculateAdminFee(amount, 0.0035) : amount;
+            modalPrice.textContent = amount ? formatRupiah(totalAmount) : '';
+            modalAdminFee.textContent = method.name === 'QRIS' ? `Biaya admin: ${formatRupiah(totalAmount - amount)}` : '';
             modal.classList.remove('hidden');
         });
 
