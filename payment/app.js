@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const amount = urlParams.get('rp') ? parseInt(urlParams.get('rp'), 10) : null;
 
     if (!amount) {
-        window.location.href = 'Wht7cbVlpaymenterror/index.html';
+        window.location.href = 'Wht7cbVlpaymenterror';
     }
 
     const paymentMethods = [
