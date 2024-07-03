@@ -2,13 +2,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const amount = urlParams.get('rp') ? parseInt(urlParams.get('rp'), 10) : null;
 
+    if (!amount) {
+        window.location.href = '404.html';
+    }
+
     const paymentMethods = [
-        { name: 'QRIS', icon: 'qris.png', modalIcon: 'qris_large.png', description: 'Pembayaran dengan QRIS.' },
-        { name: 'Pulsa', icon: 'pulsa.png', modalIcon: 'pulsa_large.png', description: 'Pembayaran dengan Pulsa.' },
-        { name: 'Bank Transfer', icon: 'bank.png', modalIcon: 'bank_large.png', description: 'Pembayaran dengan Transfer Bank.' },
-        { name: 'E-Wallet', icon: 'ewallet.png', modalIcon: 'ewallet_large.png', description: 'Pembayaran dengan E-Wallet.' },
-        { name: 'PayPal', icon: 'paypal.png', modalIcon: 'paypal_large.png', description: 'Pembayaran dengan PayPal.' },
-        { name: 'Credit Card', icon: 'creditcard.png', modalIcon: 'creditcard_large.png', description: 'Pembayaran dengan Kartu Kredit.' },
+        { name: 'QRIS', icon: 'qris.png', modalIcon: 'qris_large.png', description: 'Pembayaran dengan QRIS.', instructions: 'Scan kode QR dan lakukan pembayaran melalui aplikasi e-wallet Anda.' },
+        { name: 'Pulsa', icon: 'pulsa.png', modalIcon: 'pulsa_large.png', description: 'Pembayaran dengan Pulsa.', instructions: 'Kirim pulsa ke nomor yang ditentukan.' },
+        { name: 'Bank Transfer', icon: 'bank.png', modalIcon: 'bank_large.png', description: 'Pembayaran dengan Transfer Bank.', instructions: 'Transfer jumlah yang ditentukan ke nomor rekening bank yang diberikan.' },
+        { name: 'E-Wallet', icon: 'ewallet.png', modalIcon: 'ewallet_large.png', description: 'Pembayaran dengan E-Wallet.', instructions: 'Gunakan aplikasi e-wallet Anda untuk mentransfer jumlah yang ditentukan.' },
+        { name: 'PayPal', icon: 'paypal.png', modalIcon: 'paypal_large.png', description: 'Pembayaran dengan PayPal.', instructions: 'Lakukan pembayaran melalui akun PayPal Anda.' },
+        { name: 'Credit Card', icon: 'creditcard.png', modalIcon: 'creditcard_large.png', description: 'Pembayaran dengan Kartu Kredit.', instructions: 'Masukkan detail kartu kredit Anda untuk menyelesaikan pembayaran.' },
         // Tambahkan metode pembayaran lain di sini
     ];
 
@@ -17,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalImage = document.getElementById('modalImage');
     const modalTitle = document.getElementById('modalTitle');
     const modalDescription = document.getElementById('modalDescription');
+    const modalInstructions = document.getElementById('modalInstructions');
     const modalPrice = document.getElementById('modalPrice');
     const closeModal = document.getElementById('closeModal');
 
@@ -31,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
             modalImage.src = `./images/${method.modalIcon}`;
             modalTitle.textContent = method.name;
             modalDescription.textContent = method.description;
+            modalInstructions.textContent = method.instructions;
             modalPrice.textContent = amount ? formatRupiah(amount) : '';
             modal.classList.remove('hidden');
         });
