@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalPrice = document.getElementById('modalPrice');
     const modalAdminFee = document.getElementById('modalAdminFee');
     const closeModal = document.getElementById('closeModal');
+    const confirmPayment = document.getElementById('confirmPayment');
 
     function formatRupiah(amount) {
         return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(amount);
@@ -41,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const totalAmount = method.name === 'QRIS' ? calculateAdminFee(amount, 0.0035) : amount;
             modalPrice.textContent = amount ? formatRupiah(totalAmount) : '';
             modalAdminFee.textContent = method.name === 'QRIS' ? `Biaya admin: ${formatRupiah(totalAmount - amount)}` : '';
+            confirmPayment.onclick = () => window.location.href = 'pending-confirm.html';
             modal.classList.remove('hidden');
         });
 
