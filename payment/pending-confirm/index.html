@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pending Confirmation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-lg">
+            <h1 class="text-3xl font-bold text-center mb-4">Pending Confirmation</h1>
+            <div class="mb-4">
+                <p class="text-gray-700 text-lg">Client Name: <span id="clientName" class="font-semibold"></span></p>
+                <p class="text-gray-700 text-lg">Nominal: <span id="amount" class="font-semibold"></span></p>
+            </div>
+            <div class="mb-8">
+                <p class="text-gray-700">Please provide your payment proof in your Discord ticket.</p>
+                <p class="text-gray-700">Join our Discord server and create a ticket if you haven't already.</p>
+            </div>
+            <div class="text-center">
+                <a href="https://discord.gg/your-discord-invite" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition">Go to Discord</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
