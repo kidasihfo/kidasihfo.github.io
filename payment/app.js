@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const amount = urlParams.get('rp') ? parseInt(urlParams.get('rp'), 10) : null;
+
     const paymentMethods = [
         { name: 'QRIS', icon: 'qris.png', description: 'Pembayaran dengan QRIS.' },
         { name: 'Pulsa', icon: 'pulsa.png', description: 'Pembayaran dengan Pulsa.' },
@@ -14,7 +17,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalImage = document.getElementById('modalImage');
     const modalTitle = document.getElementById('modalTitle');
     const modalDescription = document.getElementById('modalDescription');
+    const modalPrice = document.getElementById('modalPrice');
     const closeModal = document.getElementById('closeModal');
+
+    function formatRupiah(amount) {
+        return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(amount);
+    }
 
     paymentMethods.forEach(method => {
         const card = document.createElement('div');
@@ -23,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
             modalImage.src = `./images/${method.icon}`;
             modalTitle.textContent = method.name;
             modalDescription.textContent = method.description;
+            modalPrice.textContent = amount ? formatRupiah(amount) : '';
             modal.classList.remove('hidden');
         });
 
@@ -37,6 +46,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         card.appendChild(img);
         card.appendChild(name);
+
+        if (amount) {
+            const price = document.createElement('p');
+            price.className = 'text-lg font-semibold text-center text-blue-600';
+            price.textContent = formatRupiah(amount);
+            card.appendChild(price);
+        }
 
         container.appendChild(card);
     });
