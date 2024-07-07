@@ -109,4 +109,70 @@ document.addEventListener('DOMContentLoaded', () => {
     paymentMethods.forEach(method => {
         const card = document.createElement('div');
         card.className = 'bg-white p-6 rounded-lg shadow-lg transform transition-transform hover:scale-105 cursor-pointer';
-       
+        card.addEventListener('click', () => {
+            if (method.disabled) {
+                showToast('Metode pembayaran ini tidak tersedia.');
+                return;
+            }
+            if (method.minAmount && amount < method.minAmount) {
+                showToast(`Metode pembayaran ${method.name} hanya tersedia untuk nominal di atas ${formatRupiah(method.minAmount)}.`);
+                return;
+            }
+
+            modalImage.src = `./images/${method.modalIcon}`;
+            modalTitle.textContent = method.name;
+            modalDescription.textContent = method.description;
+            modalInstructions.textContent = method.instructions;
+            
+            let totalAmount;
+            let adminFee;
+
+            if (method.name === 'QRIS') {
+                totalAmount = calculateAdminFee(amount, 0.0045);
+                adminFee = totalAmount - amount;
+                modalPrice.textContent = formatRupiah(totalAmount);
+                modalAdminFee.textContent = `*termasuk PPN sebesar: ${formatRupiah(adminFee)}`;
+            } else if (method.name === 'Pulsa') {
+                totalAmount = calculatePulsaAmount(amount, pulsaRate);
+                adminFee = totalAmount - amount;
+                modalPrice.textContent = formatRupiah(totalAmount);
+                modalAdminFee.textContent = `*termasuk PPN sebesar: ${formatRupiah(adminFee)}`;
+            } else if (method.name === 'PayPal') {
+                const dollarAmount = convertToDollar(amount, dollarRate);
+                modalPrice.textContent = formatDollar(dollarAmount);
+                modalAdminFee.textContent = '';
+            } else {
+                totalAmount = amount;
+                modalPrice.textContent = formatRupiah(totalAmount);
+                modalAdminFee.textContent = '';
+            }
+
+            confirmPayment.onclick = () => window.location.href = `pending-confirm/index.html?client=${clientName}&rp=${amount}`;
+            modal.classList.remove('hidden');
+        });
+
+        const img = document.createElement('img');
+        img.src = `./images/${method.icon}`;
+        img.alt = `${method.name} icon`;
+        img.className = 'w-20 h-20 mb-4 mx-auto';
+
+        const name = document.createElement('h2');
+        name.className = 'text-xl font-semibold text-center';
+        name.textContent = method.name;
+
+        card.appendChild(img);
+        card.appendChild(name);
+
+        container.appendChild(card);
+    });
+
+    closeModal.addEventListener('click', () => {
+        modal.classList.add('hidden');
+    });
+
+    modal.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            modal.classList.add('hidden');
+        }
+    });
+});
